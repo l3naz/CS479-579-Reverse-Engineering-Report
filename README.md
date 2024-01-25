@@ -24,6 +24,7 @@ Download and install IDA Education from the provided link.
 1. In the network settings of the VM, create a new "VirtualBox Host-only Ethernet Adapter."
 2. Change the IPv4 to "10.0.0.1" (ensure it is different from the physical host IP address).
 3. Set the subnet mask to 255.255.255.0.
+4. Change the network settings of the VM to "host-only" and choose the adapter that you created earlier
 
 ### Step 7: Create Snapshot
 Create a snapshot of your VM to easily revert to a known state if needed.
