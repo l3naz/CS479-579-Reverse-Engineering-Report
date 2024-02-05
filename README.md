@@ -35,6 +35,14 @@ Create a snapshot of your VM to easily revert to a known state if needed.
 3. Under Virus & threat protection settings, select Manage settings.
 4. Switch Real-time protection to Off.
 
+### Step 8a: Permanently Disable Windows Defender
+1. Select Start and type "Run"
+2. In Run prompt type "gpedit.msc" then click "OK"
+3. Click "Computer Configuration" -> "Administrative Templates" -> "Windows Components"
+4. On right side, scroll down and click "Windows Defender Antivirus" -> "Real-Time Protection"
+5. Double click on "Turn off real-time protection"
+6. Select "Enable" then "Apply", "OK"
+
 ### Step 9: Install Flare VM
 Follow the installation instructions provided [here](https://github.com/mandiant/flare-vm) to install Flare VM.
 
