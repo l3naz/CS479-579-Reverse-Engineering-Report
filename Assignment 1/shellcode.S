@@ -1,16 +1,27 @@
 .section .text
 .globl _start
+
 _start:
-    xorl %eax, %eax            # Clear %eax register
-    mov $59, %eax              # syscall number for execve (59 in 64-bit)
-    lea shell_path(%rip), %rdi # address of "/bin/sh" (using RIP-relative addressing)
-    xorl %esi, %esi            # null for command-line arguments
-    xorl %edx, %edx            # null for environment variables
-    syscall                    # Invoke execve syscall
+    # Set rax to 59 (sys_execve)
+    xorq    %rax, %rax
+    movb    $59, %al               # Syscall number 59 (execve)
 
-    xorl %edi, %edi            # Clear %edi register (exit status)
-    mov $60, %eax              # syscall number for exit (60 in 64-bit)
-    syscall                    # Invoke exit syscall
+    # Set rdi to point to '/bin/sh' string
+    xorq    %rdi, %rdi
+    movq    $0x68732f6e69622f, %rdi  # '/bin/sh' in little-endian
 
-.section .data
-shell_path: .asciz "/bin/sh"
+    # Set rsi to null
+    xorq    %rsi, %rsi
+
+    # Set rdx to null
+    xorq    %rdx, %rdx
+
+    # Call execve
+    syscall
+
+    # Exit
+    xorq    %rax, %rax
+    incq    %rax                     # syscall number 60 (exit)
+    xorq    %rdi, %rdi                # status code 0
+    syscall
+
